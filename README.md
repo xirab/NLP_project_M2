@@ -15,7 +15,7 @@
 ## _Material provided_
 •	App.py  
 •	index.html  
-•	index.css 
-• Dockerfile
-• docker-compose.yml
-• requirements.txt
+•	index.css  
+• Dockerfile  
+• docker-compose.yml  
+• requirements.txt  
