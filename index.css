@@ -1,0 +1,94 @@
+body {
+    background: #eee
+}
+
+#regForm {
+    background-color: #ffffff;
+    margin: 0px auto;
+    font-family: Raleway;
+    padding: 40px;
+    border-radius: 10px
+}
+
+#register {
+    color: #6A1B9A
+}
+
+h1 {
+    text-align: center;
+}
+
+input {
+    padding: 10px;
+    width: 100%;
+    font-size: 17px;
+    font-family: Raleway;
+    border: 1px solid #aaaaaa;
+    border-radius: 10px;
+    -webkit-appearance: none
+}
+
+.tab input:focus {
+    border: 1px solid #6a1b9a !important;
+    outline: none
+}
+
+.tab {
+    display: inline
+}
+
+.all-steps {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 100%;
+    display: inline-flex;
+    justify-content: center
+}
+
+.step {
+    height: 40px;
+    width: 40px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    color: #6a1b9a;
+    opacity: 0.5
+}
+
+.step.active {
+    opacity: 1
+}
+
+.step.finish {
+    color: #fff;
+    background: #6a1b9a;
+    opacity: 1
+}
+
+.all-steps {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px
+}
+
+#submit_{
+    width: 50%;
+    text-align: center;
+    margin-top: 5%;
+    margin-left: 25%;
+}
+
+#submit_:active{background-color:orange;}
+
+p {
+    margin-top : 25px;
+    text-align: center;
+    color : #da2020;
+    font-size: large;
+}
