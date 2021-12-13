@@ -1,0 +1,4 @@
+docker ps         :=: > voir si les conteneurs sont toujours actifs ; 
+docker images  :=: > voir l'ensemble des images présentes en local sur votre ordinateur
+docker image tag f5846b6643a1 sentiment_analyser:latest :=: > remane 
+docker build -f Dockerfile sentiment_analyser .  
