@@ -1,5 +1,6 @@
 flask
+nltk
+requests
 scikit-learn
-tensorflow
-keras
-pickle
+vadersentiment
+bs4
