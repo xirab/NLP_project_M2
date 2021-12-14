@@ -1,4 +1,6 @@
 flask
 scikit-learn
 tensorflow
+keras
 pickle-mixin
+

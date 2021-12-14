@@ -1,11 +1,8 @@
 from flask import Flask, request, render_template
-from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-from nltk.corpus import stopwords
-import nltk
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+import pickle
 
-nltk.download('stopwords')
-
-set(stopwords.words('english'))
 app = Flask(__name__)
 
 @app.route('/')
@@ -14,21 +11,43 @@ def my_form():
 
 @app.route('/', methods=['POST'])
 def my_form_post():
-    stop_words = stopwords.words('english')
-    sentence = request.form['user_text']
-    text = sentence.lower()
+    # get the text from the form
+    sentence = request.form['user_text'].lower()
 
-    processed_text = ' '.join([word for word in text.split() if word not in stop_words])
+    # loading the best model pretrained and saved in the model directory
+    trained_model = load_model("./model/best_model.hdf5")
 
-    sa = SentimentIntensityAnalyzer()
-    dd = sa.polarity_scores(text=processed_text)
-    #compound = round((1 + dd['compound'])/2, 2)
-    neg = round(dd['neg']*100)
-    neu = round(dd['neu']*100)
-    pos = round(dd['pos']*100)
-    sent = max(dd, key=dd.get)
+    # loading the tokenizer from the model directory to preprocessed the user's text before predicting the sentiment
+    with open('./model/tokenizer.pickle', 'rb') as handle:
+        tokenizer = pickle.load(handle)    
 
+    # we encode and preprocessed the text 
+    encoded = tokenizer.texts_to_sequences([sentence])
+    padded = pad_sequences(encoded, maxlen=200)
+
+    # print(tokenizer.word_index)
+    # print(text)
+    # print(encoded)
+    # print(padded)
+
+    # and then predict the sentiment
+    # the output is the percentage of each sentiment in the text. So we have 3 output saved in an array
+    # the overall sentiment will be the sentiment with the bigger percentage
+    prediction = trained_model.predict(padded)
+    # print(prediction)
+
+    neg = round(prediction[0][2]*100)
+    neu = round(prediction[0][0]*100)
+    pos = round(prediction[0][1]*100)
+
+    dic = {
+        'neg' : neg,
+        'neu' : neu,
+        'pos' : pos
+    }
+
+    sent = max(dic, key=dic.get)
+    
     return render_template('index.html', score=[neg, neu, pos], text=sentence, sentiment=sent)
 
 if __name__ == "__main__":
-    app.run(debug=True, host="127.0.0.1", port=5000)
