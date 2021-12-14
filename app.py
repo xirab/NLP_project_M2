@@ -11,24 +11,44 @@ def my_form():
 
 @app.route('/', methods=['POST'])
 def my_form_post():
-    text = request.form['user_text'].lower()
+    # get the text from the form
+    sentence = request.form['user_text'].lower()
 
+    # loading the best model pretrained and saved in the model directory
     trained_model = load_model("./model/best_model.hdf5")
 
+    # loading the tokenizer from the model directory to preprocessed the user's text before predicting the sentiment
     with open('./model/tokenizer.pickle', 'rb') as handle:
         tokenizer = pickle.load(handle)    
 
-    encoded = tokenizer.texts_to_sequences([text])
+    # we encode and preprocessed the text 
+    encoded = tokenizer.texts_to_sequences([sentence])
     padded = pad_sequences(encoded, maxlen=200)
 
     # print(tokenizer.word_index)
     # print(text)
     # print(encoded)
     # print(padded)
+
+    # and then predict the sentiment
+    # the output is the percentage of each sentiment in the text. So we have 3 output saved in an array
+    # the overall sentiment will be the sentiment with the bigger percentage
     prediction = trained_model.predict(padded)
     # print(prediction)
 
-    return render_template('index.html', score=(prediction[0]), text=text)
+    neg = round(prediction[0][2]*100)
+    neu = round(prediction[0][0]*100)
+    pos = round(prediction[0][1]*100)
+
+    dic = {
+        'neg' : neg,
+        'neu' : neu,
+        'pos' : pos
+    }
+
+    sent = max(dic, key=dic.get)
+    
+    return render_template('index.html', score=[neg, neu, pos], text=sentence, sentiment=sent)
 
 if __name__ == "__main__":
     app.run(debug=True, host="127.0.0.1", port=5000)

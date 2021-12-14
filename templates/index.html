@@ -10,29 +10,33 @@
             <div class="row d-flex justify-content-center align-items-center">
                 <div class="col-md-8">
                     <form id="regForm" method="post">
-                        <h1 id="register">Sentiment analyser</h1>
+                        <h1 id="register">Sentiment Analyser</h1>
                         <div class="all-steps" id="all-steps"> <span class="step"><i class="fa fa-user"></i></span> <span class="step"><i class="fa fa-map-marker"></i></span> <span class="step"><i class="fa fa-shopping-bag"></i></span> <span class="step"><i class="fa fa-car"></i></span> <span class="step"><i class="fa fa-spotify"></i></span> <span class="step"><i class="fa fa-mobile-phone"></i></span> </div>
                         <div class="tab">
-                            <h3><b>Write some text</b></h3>
+                            <h6 style="text-align: left"><br><br>The Sentiment analyser is a sentiment analysis application, which, given a piece of text, 
+                                is able to reply with the sentiment details of the text as well as the overall sentiment.<br><br>
+                            <b>Try it by writing something below.</b></h6>
                             <input placeholder="Please write something here..." name="user_text">
                         </div>
-                        <input type="submit" id="submit_" value="Send">
-
-                        <!-- <p id="retour">Bonjour Marvin</p> -->
-
-                        {% if score != [] %}
-                        <div>
-                            <br>
-                            {% if score[0] > score[2] and score[0] > score[1]%}
-                            <p>{{ text }}</p> <p>is  neutral !</p>
-                            {% endif %}
-
-                            {% if score[1] > score[0] and score[1] > score[2]%}
-                            <p>{{ text }}</p> <p>is positive !</p>
-                            {% endif %}
-
-                            {% if score[2] > score[0] and score[2] > score[1]%}
-                            <p>{{ text }}</p> <p>is negative !</p>
+                        <input type="submit" id="submit_" value="Send"><br><br>
+                        {% if text %}
+                        <div style="border-radius: 25px;background: #7373732f;padding: 20px;margin: auto;width: 500px;height: 250px;">
+                            <p>The Sentiment Detail of  "{{ text }}"  is of:<br>
+                            {{ score[0] }} % negative<br>
+                            {{ score[1] }} % neutral <br>
+                            {{ score[2] }} % positive</p>
+                            {% if sentiment == 'neu' %}
+                            <div>
+                                <p>The Overall Sentiment of "{{ text }}" is <b>Neutral</b>!</p>
+                            </div>
+                            {% elif sentiment == 'neg' %}
+                            <div>
+                                <p>The Overall Sentiment of "{{ text }}" is <b>Negatif</b>!</p>
+                            </div>
+                            {% elif sentiment == 'pos' %}
+                            <div>
+                                <p>The Overall Sentiment of "{{ text }}" is <b>Positif</b>!</p>
+                            </div>
                             {% endif %}
                         </div>
                         {% endif %}

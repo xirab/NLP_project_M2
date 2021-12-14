@@ -1,5 +1,5 @@
 flask
-nltk
-requests
 scikit-learn
-vadersentiment
+tensorflow
+keras
+pickle

@@ -11,7 +11,8 @@ body {
 }
 
 #register {
-    color: #6A1B9A
+    color: #2a4f798c;
+    font-weight: bolder;
 }
 
 h1 {
@@ -89,7 +90,6 @@ input {
 p {
     margin-top : 25px;
     text-align: center;
-    color : #da2020;
+    color : #252525;
     font-size: large;
-    font-weight: bold;
 }
