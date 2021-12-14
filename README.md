@@ -12,10 +12,13 @@
 •	The accuracy of the sentiment analyzer should be above 80%  
 •	The application must be easily deployable  
 
+## The dataset used for the model is the Twitter US airline sentiment available [here](https://www.kaggle.com/crowdflower/twitter-airline-sentiment)
+We used tensorflow and keras for the model building. 
+
 ## _Material provided_
 •	App.py  
 •	index.html  
-•	index.css  
+•	index.css
 • Dockerfile  
 • docker-compose.yml  
 • requirements.txt  
